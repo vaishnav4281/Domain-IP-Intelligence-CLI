@@ -64,8 +64,8 @@ domain-intel-cli/
 
 | domain     | created    | expires    | domain_age                | registrar         | name_servers          | abuse_score | is_vpn_or_proxy | subdomains        |
 | ---------- | ---------- | ---------- | -------------------------- | ----------------- | ---------------------- | ------------ | ------------------ | ----------------- |
-| google.com | 1997-09-15 | 2028-09-14 | 31 years, 0 months, 7 days | MarkMonitor, Inc. | ns1.google.com, ns2... | 0            | False              | mail, drive, etc. |
-| github.com | 2007-10-09 | 2026-10-09 | 19 years, 0 months, 5 days | MarkMonitor, Inc. | dns1.p08.nsone.net...  | 3            | True               | api, gist, docs   |
+| google.com | 1997-09-15 | 2028-09-14 | 31 years, 5 months, 7 days | MarkMonitor, Inc. | ns1.google.com, ns2... | 0            | False              | mail, drive, etc. |
+| github.com | 2007-10-09 | 2026-10-09 | 19 years, 2 months, 5 days | MarkMonitor, Inc. | dns1.p08.nsone.net...  | 3            | True               | api, gist, docs   |
 
 ---
 
@@ -213,25 +213,4 @@ git remote add origin https://github.com/vaishnav4281/Domain-IP-Intelligence-CLI
 git add .
 git commit -m "Initial commit"
 git push -u origin master
-```
-
----
-
-📁 Need help pushing the code?
-📦 Want a zipped release?
-🧪 Ready to build the Next.js frontend?
-
-Let me know and I’ll help with next steps!
-
-```
-
----
-
-✅ I can now:
-- Save this as a `README.md` file  
-- Export your full project as `.zip` with this README  
-- Scaffold a GitHub repository push-ready  
-- Start building the Next.js frontend
-
-Would you like the zip + README exported now?
 ```
