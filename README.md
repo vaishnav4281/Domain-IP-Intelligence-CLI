@@ -1,24 +1,21 @@
-# 🔍 Domain & IP Intelligence CLI Toolkit
+# Domain-IP-Intelligence-CLI
 
-A fully modular and extensible **Command-Line Reconnaissance Tool** that scans domains for **WHOIS data, DNS records, IP reputation, geolocation, VPN detection**, and more — with **CSV reporting** and **bulk scanning** capability.
-
-> 🎯 Built with Python by **Vaishnav K**  
-> 🔓 Powered by Open Source & Free APIs
+A powerful command-line tool for domain and IP intelligence gathering, providing comprehensive information about domains and IP addresses through various lookup and scanning capabilities.
 
 ---
 
-## ✨ Key Features
+## ✨ Features
 
-✅ **WHOIS Lookup** – Registrar, creation/expiration date, name servers  
-🌐 **DNS Records** – A, MX, NS, TXT records  
-🌍 **IP Geolocation & ASN** – ISP, region, org, timezone  
-🧠 **Abuse Detection** – Score, report count, last seen (via AbuseIPDB)  
-🛰️ **VPN/Proxy Detection** – Usage type and anonymity check  
-🔍 **Subdomain Discovery** – Using public certificate logs (crt.sh)  
-📦 **Bulk Domain Input** – Accepts `.txt` lists  
-📊 **CSV Reporting** – With domain age: years, months, days  
-📁 **Failed Lookup Logging** – Easily trace failed scans  
-💯 **Open Source & Free APIs** – No paid services required
+- WHOIS Lookup: Get domain registration details, creation date, expiration date, and registrar information
+- DNS Records: Retrieve A, MX, NS, and TXT records for domains
+- IP Information: Get geolocation, ASN, ISP, and organization details for IP addresses
+- Abuse Detection: Check IP reputation using AbuseIPDB
+- VPN/Proxy Detection: Identify VPN/proxy usage and anonymity level
+- Subdomain Discovery: Find subdomains using public certificate logs (crt.sh)
+- Bulk Domain Scanning: Process multiple domains from a text file
+- CSV Reporting: Generate detailed reports with domain age calculations
+- Failed Lookup Logging: Track failed lookups for troubleshooting
+- Open Source & Free APIs: No paid services required
 
 ---
 
@@ -27,24 +24,23 @@ A fully modular and extensible **Command-Line Reconnaissance Tool** that scans d
 ```
 
 domain-intel-cli/
-├── domain\_toolkit.py            # Main CLI controller
+├── domain_toolkit.py            # Main CLI controller
 ├── modules/
-│   ├── whois\_lookup.py          # WHOIS logic
-│   ├── dns\_lookup.py            # DNS record fetcher
-│   ├── ip\_info.py               # Geolocation, ASN
-│   ├── risk\_check.py            # AbuseIPDB risk analysis
-│   ├── subdomain\_enum.py        # crt.sh subdomain parser
-│   ├── bulk\_whois.py            # Domain age + bulk scanner
-│   └── export\_csv.py            # CSV writer
-├── data/
-│   └── output\_<timestamp>.csv   # Final reports
-│   └── failed\_<timestamp>.txt   # Failed lookups
-├── inputs/
-│   └── domains.txt              # Domain list input
-├── .env                         # API keys (e.g., AbuseIPDB)
-└── README.md
+│   ├── whois_lookup.py          # WHOIS lookup with domain age
+│   ├── dns_lookup.py            # DNS record fetcher
+│   ├── ip_info.py               # IP geolocation and ASN
+│   ├── risk_check.py            # AbuseIPDB risk analysis
+│   ├── subdomain_enum.py        # Subdomain discovery
+│   ├── bulk_whois.py            # Bulk domain scanning
+│   └── export_csv.py            # CSV export functionality
+├── data/                        # Output directory
+│   └── output_*.csv            # CSV reports
+│   └── failed_*.txt            # Failed lookups log
+├── inputs/                      # Input directory
+│   └── domains.txt             # List of domains to scan
+└── requirements.txt            # Project dependencies
 
-````
+```
 
 ---
 
@@ -60,13 +56,13 @@ domain-intel-cli/
 📁 CSV Report Saved To       : data/output_20250624_125057.csv
 ⚠️  Failed Domains Logged To : data/failed_20250624_125057.txt
 🕒 Scan Timestamp            : 2025-06-24 12:50:57
-````
+```
 
 ---
 
 ## 🧾 Sample CSV Output (Columns)
 
-| domain     | created    | expires    | domain\_age                | registrar         | name\_servers          | abuse\_score | is\_vpn\_or\_proxy | subdomains        |
+| domain     | created    | expires    | domain_age                | registrar         | name_servers          | abuse_score | is_vpn_or_proxy | subdomains        |
 | ---------- | ---------- | ---------- | -------------------------- | ----------------- | ---------------------- | ------------ | ------------------ | ----------------- |
 | google.com | 1997-09-15 | 2028-09-14 | 31 years, 0 months, 7 days | MarkMonitor, Inc. | ns1.google.com, ns2... | 0            | False              | mail, drive, etc. |
 | github.com | 2007-10-09 | 2026-10-09 | 19 years, 0 months, 5 days | MarkMonitor, Inc. | dns1.p08.nsone.net...  | 3            | True               | api, gist, docs   |
@@ -98,51 +94,100 @@ invalid.com
 ### 4️⃣ Run the CLI Tool
 
 ```bash
+python domain_toolkit.py [command] [arguments]
+```
+
+---
+
+## 📋 Available Commands
+
+### WHOIS Lookup
+
+```bash
+python domain_toolkit.py whois [domain]
+```
+
+Example:
+```bash
+python domain_toolkit.py whois google.com
+```
+
+### DNS Lookup
+
+```bash
+python domain_toolkit.py dns [domain]
+```
+
+Example:
+```bash
+python domain_toolkit.py dns google.com
+```
+
+### IP Information
+
+```bash
+python domain_toolkit.py ipinfo [ip_address]
+```
+
+Example:
+```bash
+python domain_toolkit.py ipinfo 8.8.8.8
+```
+
+### Subdomain Enumeration
+
+```bash
+python domain_toolkit.py subdomains [domain]
+```
+
+Example:
+```bash
+python domain_toolkit.py subdomains google.com
+```
+
+### Bulk WHOIS Scan
+
+```bash
+python domain_toolkit.py bulk [file_path] [--export]
+```
+
+Example:
+```bash
 python domain_toolkit.py bulk inputs/domains.txt --export
 ```
 
-### 5️⃣ Check output
+---
 
-* ✅ CSV: `data/output_<timestamp>.csv`
-* ❌ Failed: `data/failed_<timestamp>.txt`
+## 🔐 API Keys
+
+For full functionality, obtain an API key from AbuseIPDB:
+
+1. Sign up at https://www.abuseipdb.com/
+2. Create an API key in your account settings
+3. Add it to your `.env` file
 
 ---
 
-## 🧠 APIs & Libraries Used
+## 📝 Output Format
 
-| Function            | Source/API                                               |
-| ------------------- | -------------------------------------------------------- |
-| WHOIS Lookup        | [`python-whois`](https://pypi.org/project/python-whois/) |
-| DNS Records         | `dnspython`, `socket`                                    |
-| Geolocation/IP Info | [`ipapi.co`](https://ipapi.co/) or `ipinfo.io`           |
-| VPN/Proxy Check     | [`ipqualityscore.com`](https://www.ipqualityscore.com/)  |
-| Risk/Abuse Reports  | [`AbuseIPDB`](https://abuseipdb.com/)                    |
-| Subdomains          | `crt.sh` scraping (public logs)                          |
-| CSV Export          | `csv`, `datetime`, Python built-in                       |
+The tool generates two types of output:
 
----
+1. CSV Report (data/output_*.csv):
+   - Contains comprehensive domain information
+   - Includes domain age calculation
+   - Shows registrar, creation date, and expiration date
+   - Lists name servers and DNS records
+   - Shows abuse score and VPN/proxy status
+   - Lists discovered subdomains
 
-## ✅ Use Cases
-
-* OSINT for cybersecurity analysis
-* Blacklist cleanup and domain monitoring
-* DNS or hosting provider audit
-* Research on expired or suspicious domains
-* Recon during bug bounty or CTF
+2. Failed Lookups Log (data/failed_*.txt):
+   - Lists domains that failed to lookup
+   - Helps track and troubleshoot issues
 
 ---
 
-## 👤 Author
+## 📝 License
 
-**Vaishnav K**
-📧 Email: [k.vaishnav.ae@gmail.com](mailto:k.vaishnav.ae@gmail.com)
-🌐 GitHub: [github.com/vaishnav4281](https://github.com/vaishnav4281)
-
----
-
-## 📜 License
-
-**MIT License**
 Free for personal, academic, and commercial use — credit appreciated!
 
 ---
